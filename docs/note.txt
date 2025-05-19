@@ -14,3 +14,20 @@ mkdir -p cmd/golang-toolsbox \
 
 
 go mod init github.com/cifong/golang-toolsbox
+
+
+hint: Updates were rejected because the tip of your current branch is behind
+hint: its remote counterpart. If you want to integrate the remote changes,
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+
+這個錯誤訊息代表：你本地的 Git 分支比 GitHub 上的 main 分支還舊，所以推不上去。通常發生在：
+
+GitHub 上先建立了 README.md、.gitignore、LICENSE 等檔案
+
+法一  (建議)
+git pull origin main --allow-unrelated-histories
+git push origin main
+
+法二
+git push -f origin main

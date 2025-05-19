@@ -1,0 +1,16 @@
+windows 快速產生需要的資料夾
+
+mkdir -p golang-toolsbox/{cmd/server,internal/{systeminfo,shutdown,todolist,web},test,web/{static,templates},docs}
+
+
+mkdir -p cmd/golang-toolsbox \
+         internal/web \
+         internal/system \
+         internal/shutdown \
+         internal/todo \
+         web/static \
+         web/templates \
+         test
+
+
+go mod init github.com/cifong/golang-toolsbox

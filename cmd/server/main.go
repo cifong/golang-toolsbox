@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/cifong/golang-toolsbox/internal/web"
+	"github.com/cifong/golang-toolsbox/internal/router"
 )
 
 func main() {
-	web.StartServer()
+	router.StartServer()
 }

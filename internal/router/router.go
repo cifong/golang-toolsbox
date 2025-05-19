@@ -1,4 +1,4 @@
-package web
+package router
 
 import (
 	"github.com/cifong/golang-toolsbox/internal/handler"
@@ -14,7 +14,13 @@ func SetupRouter() *gin.Engine {
 	})
 
 	// 系統資訊 API
-	r.GET("/api/system/info", handler.GetSystemInfo)
+	systemRoutes := r.Group("/api/v1/system")
+	{
+		systemRoutes.GET("/info", handler.GetSystemInfo)       // 取得系統資訊
+		systemRoutes.POST("/shutdown", handler.ShutdownSystem) // 關機
+	}
+
+	r.Static("/todo", "./web/todo")
 
 	return r
 }

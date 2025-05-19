@@ -15,3 +15,12 @@ func GetSystemInfo(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, info)
 }
+
+func ShutdownSystem(c *gin.Context) {
+	// 回應 JSON 後再背景執行關機
+	go func() {
+		_ = system.Shutdown()
+	}()
+
+	c.JSON(http.StatusOK, gin.H{"message": "System is shutting down..."})
+}

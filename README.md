@@ -1,20 +1,47 @@
-# 專案架構（project-layout）  
-   golang-toolsbox/
-├── cmd/                  # 主執行點  
-│   └── server/           # Web Server 入口  
-│       └── main.go  
-├── internal/             # 主要邏輯（封裝在 internal）  
-│   ├── systeminfo/       # 系統資訊  
-│   ├── shutdown/         # 關機邏輯  
-│   └── todolist/         # ToDoList 模組  
-├── api/                  # handler 與路由設定  
-├── web/                  # HTML/JS 前端（或分離部署） 
-├── test/                 # 測試  
-├── scripts/              # 啟動與部署腳本  
-├── go.mod  
-└── README.md  
+# 🧰 golang-toolsbox
 
-# 環境
+一個使用 Golang 開發的系統工具箱，具備下列功能：
+
+- 📊 顯示系統資訊（CPU、記憶體、磁碟使用率）
+- ⏻ 遠端關機功能（透過 API 觸發）
+- ✅ 四象限 ToDoList 工具（資料儲存在瀏覽器端 LocalStorage）
+
+> 架構遵循 [golang-standards/project-layout](https://github.com/golang-standards/project-layout)，具備可測試性與模組化。
+
+---
+
+## 專案架構（project-layout）  
+
+golang-toolsbox/  
+├── cmd/ # 主要執行點 (server/main)  
+├── internal/  
+│ ├── handler/ # HTTP handler  
+│ ├── router/ # Gin 路由設定  
+│ ├── system/ # 系統資訊、關機邏輯  
+├── web/  
+│ └── todo/ # ToDoList HTML/JS 靜態前端  
+├── test/ # 單元測試與整合測試  
+├── go.mod  
+├── README.md  
+
+## 環境
 - Go 1.24.3
 - Git
 - VSCode
+
+---
+
+## 🚀 執行方式
+
+### 1️⃣ 安裝依賴
+- go mod tidy
+### 2️⃣ 執行伺服器
+- go run cmd/server/server.go
+
+### 伺服器啟動後：
+
+- 系統資訊： http://localhost:8080/api/v1/info
+
+- 關機： POST http://localhost:8080/api/v1/shutdown
+
+- ToDo 工具頁面： http://localhost:8080/todo/

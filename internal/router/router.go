@@ -6,21 +6,29 @@ import (
 )
 
 func SetupRouter() *gin.Engine {
-	r := gin.Default()
+	router := gin.Default()
 
-	// 首頁
-	r.GET("/", func(c *gin.Context) {
-		c.String(200, "Welcome to golang-toolsbox!")
-	})
+	// 載入模板與靜態資源
+	router.LoadHTMLGlob("web/templates/*")
+	router.Static("/css", "./web/static/css")
+	router.Static("/js", "./web/static/js")
 
-	// 系統資訊 API
-	systemRoutes := r.Group("/api/v1/system")
+	// 頁面路由
+	pageRoutes := router.Group("/")
 	{
-		systemRoutes.GET("/info", handler.GetSystemInfo)       // 取得系統資訊
-		systemRoutes.POST("/shutdown", handler.ShutdownSystem) // 關機
+		pageRoutes.GET("/", handler.RenderIndex)
+		pageRoutes.GET("/todo", handler.RenderTodo)
 	}
 
-	r.Static("/todo", "./web/todo")
+	// API 路由
+	api := router.Group("/api/v1")
+	{
+		systemRoutes := api.Group("/system")
+		{
+			systemRoutes.GET("/info", handler.GetSystemInfo)
+			systemRoutes.POST("/shutdown", handler.ShutdownSystem)
+		}
+	}
 
-	return r
+	return router
 }

@@ -13,14 +13,14 @@
 ## 專案架構（project-layout）  
 
 golang-toolsbox/  
-├── cmd/ # 主要執行點 (server/main)  
+├── cmd/ # 主要執行點 (server)  
 ├── internal/  
-│ ├── handler/ # HTTP handler  
+│ ├── handler/ # HTTP handler (page/system)
 │ ├── router/ # Gin 路由設定  
 │ ├── system/ # 系統資訊、關機邏輯  
 ├── web/  
-│ └── todo/ # ToDoList HTML/JS 靜態前端  
-├── test/ # 單元測試與整合測試  
+│ ├── static/ # 存放css js   
+│ └── templates/ # html模板
 ├── go.mod  
 ├── README.md  
 

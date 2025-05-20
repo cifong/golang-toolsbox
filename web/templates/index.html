@@ -1,20 +1,44 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant">
+
 <head>
   <meta charset="UTF-8">
-  <title>工具箱首頁</title>
-  <link rel="stylesheet" href="/css/main.css">
+  <title>Golang 工具箱</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-  <h1>系統資訊</h1>
-  <div id="system-info">
-    <p>載入中....</p>
-  </div>
 
-  <button id="shutdown-button">立即關機</button>
+<body class="bg-gray-100 text-gray-800 font-sans">
 
-  <h2><a href="/todo">前往 ToDo 四象限工具</a></h2>
+  <header class="bg-blue-800 text-white p-6 shadow">
+    <h1 class="text-3xl font-semibold">Golang 工具箱</h1>
+  </header>
 
+  <main class="max-w-4xl mx-auto mt-8 space-y-6 p-4">
+
+    <!-- 系統資訊區塊 -->
+    <div class="bg-white shadow-md rounded-lg p-6">
+      <h2 class="text-xl font-bold mb-4">系統資訊</h2>
+      <button data-action="get-system-info"
+        class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">取得系統資訊</button>
+      <div id="sysinfo" class="bg-gray-100 mt-4 p-4 rounded text-sm whitespace-pre-wrap">尚未載入</div>
+    </div>
+
+    <!-- 關機區塊 -->
+    <div class="bg-white shadow-md rounded-lg p-6">
+      <h2 class="text-xl font-bold mb-4">關機操作</h2>
+      <button data-action="shutdown"
+        class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition">立即關機</button>
+    </div>
+
+    <!-- ToDo 區塊 -->
+    <div class="bg-white shadow-md rounded-lg p-6">
+      <h2 class="text-xl font-bold mb-4">任務管理</h2>
+      <button data-action="goto-todo"
+        class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">前往四象限 ToDo 工具</button>
+    </div>
+
+  </main>
   <script src="/js/index.js"></script>
 </body>
+
 </html>

@@ -20,7 +20,7 @@ golang-toolsbox/
 │ ├── system/ # 系統資訊、關機邏輯  
 ├── web/  
 │ ├── static/ # 存放css js   
-│ └── templates/ # html模板
+│ └── templates/ # html模板  
 ├── go.mod  
 ├── README.md  
 

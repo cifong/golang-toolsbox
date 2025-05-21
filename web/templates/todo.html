@@ -3,15 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <title>四象限 ToDo 工具</title>
-  <link rel="stylesheet" href="/css/main.css">
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-  <h1>四象限 ToDo 工具</h1>
-  <div id="todo-app">
-    <!-- 四象限內容會由 JS 建立 -->
-  </div>
+<body class="bg-gray-100 text-gray-800 min-h-screen">
+  <div class="container mx-auto p-6">
+    <h1 class="text-3xl font-bold mb-6 text-center">四象限任務管理</h1>
 
-  <a href="/">回首頁</a>
+    <div id="todo-app" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- 動態建立象限區塊 -->
+    </div>
+
+    <div class="mt-8 text-center">
+      <a href="/" class="text-blue-600 hover:underline">回首頁</a>
+    </div>
+  </div>
 
   <script src="/js/todo.js"></script>
 </body>

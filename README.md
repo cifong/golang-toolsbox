@@ -36,7 +36,7 @@ golang-toolsbox/
 ### 1️⃣ 安裝依賴
 - go mod tidy
 ### 2️⃣ 執行伺服器
-- go run cmd/server/server.go
+- go run cmd/server/main.go
 
 ### 伺服器啟動後：
 

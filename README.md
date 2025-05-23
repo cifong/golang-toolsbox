@@ -15,7 +15,7 @@
 golang-toolsbox/  
 ├── cmd/ # 主要執行點 (server)  
 ├── internal/  
-│ ├── handler/ # HTTP handler (page/system)
+│ ├── handler/ # HTTP handler (page/system)  
 │ ├── router/ # Gin 路由設定  
 │ ├── system/ # 系統資訊、關機邏輯  
 ├── web/  

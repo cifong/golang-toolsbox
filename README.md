@@ -13,17 +13,21 @@
 ## 專案架構（project-layout）  
 
 golang-toolsbox/  
-├── cmd/ # 主要執行點 (server)  
+├── cmd/  
+│   └── server/             # 主要執行點 main.go  
 ├── internal/  
-│ ├── handler/ # HTTP handler (page/system)  
-│ ├── router/ # Gin 路由設定  
-│ ├── system/ # 系統資訊、關機邏輯  
+│   ├── handler/  
+│   │   ├── api/            # REST API handler  
+│   │   ├── web/            # HTML 頁面 handler  
+│   │   └── websocket/      # WebSocket handler  
+│   ├── router/             # Gin 路由設定   
+│   ├── system/             # 系統資訊與關機邏輯  
 ├── web/  
-│ ├── static/ # 存放css js   
-│ └── templates/ # html模板  
+│   ├── static/             # 存放css js    
+│   └── templates/          # html模板   
 ├── go.mod  
 ├── README.md  
-
+  
 ## 環境
 - Go 1.24.3
 - Git

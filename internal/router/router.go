@@ -1,7 +1,8 @@
 package router
 
 import (
-	"github.com/cifong/golang-toolsbox/internal/handler"
+	"github.com/cifong/golang-toolsbox/internal/handler/api"
+	"github.com/cifong/golang-toolsbox/internal/handler/web"
 	"github.com/gin-gonic/gin"
 )
 
@@ -16,17 +17,17 @@ func SetupRouter() *gin.Engine {
 	// 頁面路由
 	pageRoutes := router.Group("/")
 	{
-		pageRoutes.GET("/", handler.RenderIndex)
-		pageRoutes.GET("/todo", handler.RenderTodo)
+		pageRoutes.GET("/", web.RenderIndex)
+		pageRoutes.GET("/todo", web.RenderTodo)
 	}
 
 	// API 路由
-	api := router.Group("/api/v1")
+	apiRoutes := router.Group("/api/v1")
 	{
-		systemRoutes := api.Group("/system")
+		systemRoutes := apiRoutes.Group("/system")
 		{
-			systemRoutes.GET("/info", handler.GetSystemInfo)
-			systemRoutes.POST("/shutdown", handler.ShutdownSystem)
+			systemRoutes.GET("/info", api.GetSystemInfo)
+			systemRoutes.POST("/shutdown", api.ShutdownSystem)
 		}
 	}
 

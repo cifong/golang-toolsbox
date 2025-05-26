@@ -34,10 +34,56 @@ document.addEventListener('click', function (e) {
       window.location.href = "/todo";
       break;
   }
-  function roundToTwo(num) {
-    return Number((num).toFixed(2));
+});
+
+let socket = null;
+
+function connectWebSocket() {
+  socket = new WebSocket("ws://localhost:8080/ws/v1/system/info");
+
+  socket.onopen = () => {
+    console.log("✅ WebSocket 已連線");
+  };
+
+  socket.onmessage = (event) => {
+    const data = JSON.parse(event.data);
+    document.getElementById('sysinfo').innerHTML = `
+      <p>作業系統：${data.os}</p>
+      <p>架構：${data.arch}</p>
+      <p>Go 版本：${data.version}</p>
+      <p>CPU Usage：${roundToTwo(data.cpu_usage)}%</p>
+      <p>Used Memory：${bytesToGB(data.used_memory)}GB</p>
+      <p>Total Memory：${bytesToGB(data.total_memory)}GB</p>
+    `;
+  };
+
+  socket.onerror = (err) => {
+    console.error("❌ WebSocket 錯誤", err);
+  };
+
+  socket.onclose = () => {
+    console.log("🔌 WebSocket 已關閉");
+  };
+}
+
+function disconnectWebSocket() {
+  if (socket) {
+    socket.close();
+    socket = null;
   }
-  function bytesToGB(bytes) {
-    return Number((bytes / (1024 ** 3)).toFixed(2));
+}
+
+document.getElementById('realtimeToggle').addEventListener('change', function () {
+  if (this.checked) {
+    connectWebSocket();
+  } else {
+    disconnectWebSocket();
   }
 });
+
+function roundToTwo(num) {
+  return Number((num).toFixed(2));
+}
+function bytesToGB(bytes) {
+  return Number((bytes / (1024 ** 3)).toFixed(2));
+}

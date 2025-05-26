@@ -3,6 +3,8 @@ package router
 import (
 	"github.com/cifong/golang-toolsbox/internal/handler/api"
 	"github.com/cifong/golang-toolsbox/internal/handler/web"
+	"github.com/cifong/golang-toolsbox/internal/handler/websocket"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -31,5 +33,13 @@ func SetupRouter() *gin.Engine {
 		}
 	}
 
+	// WebSocket 路由
+	wsRoutes := router.Group("/ws/v1")
+	{
+		systemRoutes := wsRoutes.Group("/system")
+		{
+			systemRoutes.GET("/info", websocket.GetSystemInfoWebSocket)
+		}
+	}
 	return router
 }

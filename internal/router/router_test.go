@@ -9,6 +9,7 @@ import (
 
 	"github.com/cifong/golang-toolsbox/internal/router"
 	"github.com/gin-gonic/gin"
+	"github.com/gorilla/websocket"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -77,4 +78,33 @@ func TestShutdownAPI(t *testing.T) {
 
 	assert.Equal(t, http.StatusOK, w.Code)
 	assert.Contains(t, w.Body.String(), "System is shutting down")
+}
+
+func TestSystemInfoWebSocket(t *testing.T) {
+	// 啟動測試伺服器
+	r := router.SetupRouter()
+	ts := httptest.NewServer(r)
+	defer ts.Close()
+
+	// 將 HTTP URL 轉為 WS URL
+	wsURL := "ws" + ts.URL[len("http"):] + "/ws/v1/system/info"
+
+	// 建立 header，加入允許的 Origin
+	header := http.Header{}
+	header.Add("Origin", "http://localhost:8080")
+
+	// 建立 WebSocket 連線
+	ws, _, err := websocket.DefaultDialer.Dial(wsURL, header)
+	assert.NoError(t, err)
+	defer ws.Close()
+
+	// 接收一筆訊息
+	_, message, err := ws.ReadMessage()
+	assert.NoError(t, err)
+	assert.Contains(t, string(message), "cpu_usage")
+	assert.Contains(t, string(message), "used_memory")
+	assert.Contains(t, string(message), "total_memory")
+	assert.Contains(t, string(message), "os")
+	assert.Contains(t, string(message), "arch")
+	assert.Contains(t, string(message), "version")
 }

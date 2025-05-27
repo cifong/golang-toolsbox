@@ -2,7 +2,6 @@ package websocket
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 	"net/http"
 	"time"
@@ -19,7 +18,6 @@ var upgrader = websocket.Upgrader{
 			"http://localhost:8080": true,
 			"http://127.0.0.1:8080": true,
 		}
-		fmt.Println("🔍 Origin:", r.Header.Get("Origin"))
 		return allowedOrigins[origin]
 	},
 }

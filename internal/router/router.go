@@ -15,6 +15,14 @@ func SetupRouter() *gin.Engine {
 	router.LoadHTMLGlob("web/templates/*")
 	router.Static("/css", "./web/static/css")
 	router.Static("/js", "./web/static/js")
+	// icon 與 manifest 檔案
+	router.StaticFile("/favicon.ico", "./web/static/favicon.ico")
+	router.StaticFile("/favicon.svg", "./web/static/favicon.svg")
+	router.StaticFile("/favicon-96x96.png", "./web/static/favicon-96x96.png")
+	router.StaticFile("/apple-touch-icon.png", "./web/static/apple-touch-icon.png")
+	router.StaticFile("/site.webmanifest", "./web/static/site.webmanifest")
+	router.StaticFile("/web-app-manifest-192x192.png", "./web/static/web-app-manifest-192x192.png")
+	router.StaticFile("/web-app-manifest-512x512.png", "./web/static/web-app-manifest-512x512.png")
 
 	// 頁面路由
 	pageRoutes := router.Group("/")

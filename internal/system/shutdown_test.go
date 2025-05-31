@@ -9,6 +9,7 @@ func TestShutdown_Windows(t *testing.T) {
 	called := false
 	ShutdownFunc = func(goos string, command func(string, ...string) *exec.Cmd) error {
 		if goos != "windows" {
+			called = true
 			return nil
 		}
 		cmd := command("shutdown", "/s", "/t", "0")

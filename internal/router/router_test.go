@@ -4,10 +4,12 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"testing"
 
 	"github.com/cifong/golang-toolsbox/internal/router"
+	"github.com/cifong/golang-toolsbox/internal/system"
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
 	"github.com/stretchr/testify/assert"
@@ -70,6 +72,13 @@ func TestSystemInfoAPI(t *testing.T) {
 }
 
 func TestShutdownAPI(t *testing.T) {
+	// mock 關機函式，避免真的關機
+	origShutdownFunc := system.ShutdownFunc
+	system.ShutdownFunc = func(goos string, command func(string, ...string) *exec.Cmd) error {
+		return nil // 模擬成功
+	}
+	defer func() { system.ShutdownFunc = origShutdownFunc }()
+
 	r := router.SetupRouter()
 
 	req, _ := http.NewRequest("POST", "/api/v1/system/shutdown", nil)
